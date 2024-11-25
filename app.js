@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const sequelize = require("./config/database");
+const authRoutes = require("./routes/authRoutes"); // Poveži authRoutes
 const serviceRoutes = require("./routes/serviceRoutes");
 
 const app = express();
@@ -8,6 +9,9 @@ const cors = require("cors");
 app.use(cors());
 
 app.use(express.json());
+
+// Poveži auth rute na "/api/users" putanju
+app.use("/api/users", authRoutes);
 
 sequelize
   .authenticate()
